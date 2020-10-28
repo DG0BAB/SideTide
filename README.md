@@ -1,2 +1,2 @@
 # SideTide
-Simple Declarative Text Input Delegate
+**Si**mple **De**clarative **T**ext **I**nput **De**legate
