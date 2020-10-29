@@ -14,7 +14,25 @@ public class TextFieldDelegate: TextInputBaseDelegate<UITextField>, UITextFieldD
 	public func textFieldDidBeginEditing(_ textField: UITextField) {
 		closureStore.didBeginEditing?(textField)
 	}
+	public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+		return closureStore.shouldEndEditing?(textField) ?? true
+	}
+	public func textFieldDidEndEditing(_ textField: UITextField) {
+		closureStore.didEndEditing?(textField)
+	}
+	public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+		closureStore.didEndEditingWithReason?(textField, reason)
+	}
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		closureStore.shouldChange?(textField, range, string) ?? true
+	}
+	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
+		return closureStore.shouldClear?(textField) ?? true
+	}
+	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		return closureStore.shouldReturn?(textField) ?? true
+	}
+	public func textFieldDidChangeSelection(_ textField: UITextField) {
+		closureStore.didChangeSelection?(textField)
 	}
 }
