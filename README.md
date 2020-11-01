@@ -3,7 +3,7 @@ SideTide
 ### A **Si**mple **De**clarative **T**ext **I**nput **De**legate.
 <p></p>
 
-[![Swift Package Manager compatible](https://img.shields.io/static/v1?label=SwiftPM&message=compatible&color="green"&style=plastic)](https://github.com/apple/swift-package-manager) [![Version](https://img.shields.io/static/v1?label=Version&message=1.0.0&color=blue&style=plastic)](https://github.com/apple/swift-package-manager)<br>
+[![Swift Package Manager compatible](https://img.shields.io/static/v1?label=SwiftPM&message=compatible&color="green"&style=plastic)](https://github.com/apple/swift-package-manager) [![Version](https://img.shields.io/static/v1?label=Version&message=1.0.0&color=blue&style=plastic)](https://github.com/DG0BAB/SideTide/releases/tag/1.0.0)<br>
 
 - **Si**mple<br>
 Greatly simplyfies how delegates for UITextField and UITextView are created and assigned.  
@@ -27,7 +27,7 @@ final class MyViewController: UIViewController {
 		
         phoneNumberInputField.sideTideDelegate = TextFieldDelegate {
             ShouldBeginEditing { _ in print("Should begin was called."); return true }
-            DidBeginEditing { _ in print("Did begin was calles") }
+            DidBeginEditing { _ in print("Did begin was called") }
             ShouldChange { (_, range, string) in return string == "o" ? false : true }
         }
     }
@@ -46,7 +46,7 @@ In the swift file where you want SideTide to be avaliable, just enter `import Si
 
 Depending on the type of input control used, `UITextField` or `UITextView`, a `TextFieldDelegate` or a `TextViewDelegate` has to be created. Both are made available by the above import statement. 
 
-The mothod-types offered by the SideTide delegates are very intuitive and follow the method-names of the corresponding `UITextFieldDelegate` or `UITextViewDelegate` 
+The method-types offered by the SideTide delegates are very intuitive and follow the method-names of the corresponding `UITextFieldDelegate` or `UITextViewDelegate` 
 
 ### The `TextFieldDelegate` offers the following method-types<br>
 - `ShouldBeginEditing(_: @escaping (UITextField) -> Bool)`
