@@ -22,14 +22,14 @@ import SideTide
 final class MyViewController: UIViewController {
     @IBOutlet weak var phoneNumberInputField: UITextField!
 
-	override func viewDidLoad() {
-		super.viewDidLoad()
+    override func viewDidLoad() {
+    super.viewDidLoad()
 		
-		phoneNumberInputField.sideTideDelegate = TextFieldDelegate {
-			ShouldBeginEditing { _ in print("Should begin was called."); return true }
-			DidBeginEditing { _ in print("Did begin was calles") }
-			ShouldChange { (_, range, string) in return string == "o" ? false : true }
-		}
+        phoneNumberInputField.sideTideDelegate = TextFieldDelegate {
+            ShouldBeginEditing { _ in print("Should begin was called."); return true }
+            DidBeginEditing { _ in print("Did begin was calles") }
+            ShouldChange { (_, range, string) in return string == "o" ? false : true }
+        }
     }
 }
 ```
