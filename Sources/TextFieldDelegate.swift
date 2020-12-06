@@ -7,7 +7,8 @@
 
 import UIKit.UITextField
 
-public class TextFieldDelegate: TextInputBaseDelegate<UITextField>, UITextFieldDelegate {
+@objc public class TextFieldDelegate: NSObject, UITextFieldDelegate, NSCopying {
+
 	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 		return closureStore.shouldBeginEditing?(textField) ?? true
 	}
@@ -35,4 +36,28 @@ public class TextFieldDelegate: TextInputBaseDelegate<UITextField>, UITextFieldD
 	public func textFieldDidChangeSelection(_ textField: UITextField) {
 		closureStore.didChangeSelection?(textField)
 	}
+
+	// Satisfying NSCopying
+	public func copy(with zone: NSZone? = nil) -> Any {
+		let copy = TextFieldDelegate(other: self)
+		return copy
+	}
+
+	/// Allows initialization by function builder
+	public convenience init(@TextInputDelegateBuilder<UITextField> _ closures: () -> TextFieldDelegate) {
+		let delegate = closures()
+		self.init(other: delegate)
+	}
+
+	// Used by the function builder to store the closure store
+	internal init(store: TextInputDelegateClosureStore<UITextField>) {
+		self.closureStore = store
+	}
+
+	// Used by the convenience initializer and copy
+	private init(other: TextFieldDelegate) {
+		self.closureStore = other.closureStore
+		super.init()
+	}
+	private let closureStore: TextInputDelegateClosureStore<UITextField>
 }
