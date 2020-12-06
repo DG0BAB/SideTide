@@ -20,14 +20,8 @@ public struct TextInputDelegateBuilder<TextInputType: UITextInput> {
 		closures.forEach { $0.insertClosure(into: &store) }
 		return store
 	}
-	// This creates the TextFieldDelegate as the final result by initializing it with the closure store
-	public static func buildFinalResult(_ store: TextInputDelegateClosureStore<TextInputType>) -> TextFieldDelegate where TextInputType == UITextField {
-		return TextFieldDelegate(store: store)
-	}
-
-	// This creates the TextViewDelegate as the final result by initializing it with the closure store
-	public static func buildFinalResult(_ store: TextInputDelegateClosureStore<TextInputType>) -> TextViewDelegate where TextInputType == UITextView {
-		return TextViewDelegate(store: store)
+	public static func buildFinalResult(_ store: TextInputDelegateClosureStore<TextInputType>) -> TextInputBaseDelegate<TextInputType> {
+		return TextInputBaseDelegate<TextInputType>(store: store)
 	}
 }
 
@@ -122,4 +116,23 @@ public struct TextInputDelegateClosureStore<TextInputType: UITextInput> {
 	internal var shouldReturn: ((TextInputType) -> Bool)?
 	internal var shouldInteractWithAttachment: ((TextInputType, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?
 	internal var shouldInteractWithURL: ((TextInputType, URL, NSRange, UITextItemInteraction) -> Bool)?
+}
+
+
+// MARK: - Base TextField/TextView Delegate
+
+/// Base class for `TextFieldDelegate` and `TextViewDelegate`
+/// It allows creation of Delegates in a declarative (SwiftUI) way
+public class TextInputBaseDelegate<TextInputType: UITextInput>: NSObject {
+	public convenience init(@TextInputDelegateBuilder<TextInputType> _ closures: () -> TextInputBaseDelegate<TextInputType>) {
+		let store = closures()
+		self.init(other: store)
+	}
+	fileprivate init(other: TextInputBaseDelegate) {
+		self.closureStore = other.closureStore
+	}
+	fileprivate init(store: TextInputDelegateClosureStore<TextInputType>) {
+		self.closureStore = store
+	}
+	internal var closureStore: TextInputDelegateClosureStore<TextInputType>
 }
