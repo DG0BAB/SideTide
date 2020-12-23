@@ -3,7 +3,7 @@ SideTide
 ### A **Si**mple **De**clarative **T**ext **I**nput **De**legate.
 <p></p>
 
-[![Swift Package Manager compatible](https://img.shields.io/static/v1?label=SwiftPM&message=compatible&color="green"&style=plastic)](https://github.com/apple/swift-package-manager) [![Version](https://img.shields.io/static/v1?label=Version&message=1.0.0&color=blue&style=plastic)](https://github.com/DG0BAB/SideTide/releases/tag/1.0.1)<br>
+[![Swift Package Manager compatible](https://img.shields.io/static/v1?label=SwiftPM&message=compatible&color="green"&style=plastic)](https://github.com/apple/swift-package-manager) [![Version](https://img.shields.io/static/v1?label=Version&message=1.0.1&color=blue&style=plastic)](https://github.com/DG0BAB/SideTide/releases/tag/1.0.1)<br>
 
 - **Si**mple<br>
 Greatly simplyfies how delegates for UITextField and UITextView are created and assigned.  
